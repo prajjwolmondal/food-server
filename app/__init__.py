@@ -1,14 +1,16 @@
-import os
-
 from flask import Flask
+from config import Config
+from flask_bcrypt  import Bcrypt
+from flask_login import LoginManager
+from app.db import DB
 
-def create_app():
-    app = Flask(__name__, instance_relative_config=True)
-    app.config["DEBUG"] = True
+application = Flask(__name__)
+application.config.from_object(Config)
+bcrypt = Bcrypt(application)
+login = LoginManager(application)
+login.login_view = 'login'
+# The 'login' value above is the function (or endpoint) name for the login view. 
+# In other words, the name you would use in a url_for() call to get the URL.
+db = DB(application)
 
-    # a simple page that says hello
-    @app.route('/')
-    def hello():
-        return 'Hello, World!'
-
-    return app
+from app import routes
