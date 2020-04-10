@@ -8,13 +8,13 @@
     </head>
     <body>
         <div>Microblog: 
-            <a href="{{url_for('index')}}">Home</a>
+            <a href="{{url_for('main_blueprint.index')}}">Home</a>
             {% if current_user.is_anonymous %}
-            <a href="{{url_for('login')}}">Login</a>
-            <a href="{{url_for('signup')}}">Signup</a>
+            <a href="{{url_for('auth_blueprint.login')}}">Login</a>
+            <a href="{{url_for('auth_blueprint.signup')}}">Signup</a>
             {% else %}
-            <a href="{{url_for('get_user_profile', username=current_user.username)}}">Profile</a>
-            <a href="{{url_for('logout')}}">Logout</a>
+            <a href="{{url_for('main_blueprint.get_user_profile', username=current_user.username)}}">Profile</a>
+            <a href="{{url_for('auth_blueprint.logout')}}">Logout</a>
             {% endif %}
         </div>
         <hr>
