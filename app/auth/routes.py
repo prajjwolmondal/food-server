@@ -45,5 +45,5 @@ def signup():
         encrypted_pwd = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         print(f"encrypted_pwd: {encrypted_pwd}")
         db.add_user({'username': form.username.data, 'password': str(encrypted_pwd), 'email': form.email.data})
-        return redirect(url_for('index'))
+        return redirect(url_for('main_blueprint.index'))
     return render_template('auth/signup.html', title="Sign in", form=form)

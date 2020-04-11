@@ -2,8 +2,8 @@ from flask_pymongo import PyMongo, pymongo
 from bson.objectid import ObjectId
 
 class DB():
-
-    def __init__(self, context):
+    
+    def set_pymongo_context(self, context):
         self.mongo = PyMongo(context)
 
     def add_user(self, user_dict: dict) -> str:

@@ -9,31 +9,38 @@ from logging.handlers import RotatingFileHandler
 import logging
 import os
 
-application = Flask(__name__)
-application.config.from_object(Config)
-application.register_blueprint(error_blueprint)
-bcrypt = Bcrypt(application)
-login = LoginManager(application)
+bcrypt = Bcrypt()
+login = LoginManager()
 login.login_view = 'auth_blueprint.login'
 # The 'login' value above is the function (or endpoint) name for the login view. 
 # In other words, the name you would use in a url_for() call to get the URL.
-db = DB(application)
+db = DB()
 
-from app.auth import auth_blueprint
-application.register_blueprint(auth_blueprint, url_prefix="/auth")
+def create_app(config_class=Config):
+    application = Flask(__name__)
+    application.config.from_object(config_class)
+    application.register_blueprint(error_blueprint)
 
-from app.main import main_blueprint
-application.register_blueprint(main_blueprint)
+    bcrypt.init_app(application)
+    login.init_app(application)
+    db.set_pymongo_context(application)
 
-if not os.path.exists('logs'):
-    os.mkdir('logs')
+    from app.auth import auth_blueprint
+    application.register_blueprint(auth_blueprint, url_prefix="/auth")
 
-file_handler = RotatingFileHandler('logs/foodserver.log', maxBytes=10240, backupCount=10)
-file_handler.setFormatter(logging.Formatter(
-        '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
-file_handler.setLevel(logging.INFO)
-application.logger.addHandler(file_handler)
-application.logger.setLevel(logging.INFO)
-application.logger.info('foodserver starting up')
+    from app.main import main_blueprint
+    application.register_blueprint(main_blueprint)
+
+    if not os.path.exists('logs'):
+        os.mkdir('logs')
+    file_handler = RotatingFileHandler('logs/foodserver.log', maxBytes=10240, backupCount=10)
+    file_handler.setFormatter(logging.Formatter(
+            '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+    file_handler.setLevel(logging.INFO)
+    application.logger.addHandler(file_handler)
+    application.logger.setLevel(logging.INFO)
+    application.logger.info('foodserver starting up')
+
+    return application
 
 from app import models
