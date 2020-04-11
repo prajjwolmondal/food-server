@@ -1,10 +1,13 @@
-from flask import Flask
-from config import Config
-from flask_bcrypt  import Bcrypt
-from flask_login import LoginManager
 from app.db import DB
 from app.errors import error_blueprint
+from config import Config
+from flask import Flask
+from flask_bcrypt  import Bcrypt
+from flask_login import LoginManager
+from logging.handlers import RotatingFileHandler
 
+import logging
+import os
 
 application = Flask(__name__)
 application.config.from_object(Config)
@@ -21,5 +24,16 @@ application.register_blueprint(auth_blueprint, url_prefix="/auth")
 
 from app.main import main_blueprint
 application.register_blueprint(main_blueprint)
+
+if not os.path.exists('logs'):
+    os.mkdir('logs')
+
+file_handler = RotatingFileHandler('logs/foodserver.log', maxBytes=10240, backupCount=10)
+file_handler.setFormatter(logging.Formatter(
+        '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+file_handler.setLevel(logging.INFO)
+application.logger.addHandler(file_handler)
+application.logger.setLevel(logging.INFO)
+application.logger.info('foodserver starting up')
 
 from app import models
