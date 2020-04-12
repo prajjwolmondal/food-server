@@ -13,7 +13,7 @@
             <a href="{{url_for('auth_blueprint.login')}}">Login</a>
             <a href="{{url_for('auth_blueprint.signup')}}">Signup</a>
             {% else %}
-            <a href="{{url_for('main_blueprint.get_user_profile', username=current_user.username)}}">Profile</a>
+            <a href="{{url_for('user_profile_blueprint.get_user_profile', username=current_user.username)}}">Profile</a>
             <a href="{{url_for('auth_blueprint.logout')}}">Logout</a>
             {% endif %}
         </div>

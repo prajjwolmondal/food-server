@@ -10,3 +10,4 @@ class Config(object):
     MONGO_DB_PWD = os.getenv('MONGO_PWD')
     MONGO_DB_NAME = "untitled2"
     MONGO_URI = f"mongodb+srv://prajjwol:{MONGO_DB_PWD}@initcluster-2dabv.mongodb.net/{MONGO_DB_NAME}?retryWrites=true&w=majority"
+    GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')

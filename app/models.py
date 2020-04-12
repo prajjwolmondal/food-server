@@ -9,7 +9,7 @@ class User(UserMixin):
         self.password = password
         self.email = email
 
-    def update_postal_code(self, new_postal_code):
+    def set_postal_code_and_lat_long(self, new_postal_code):
         self.postal_code = new_postal_code
 
     def update_password(self, new_password):
@@ -20,7 +20,7 @@ class User(UserMixin):
         print(f"stored_hash: {self.password}")
         print(f"given pwd has: { bcrypt.generate_password_hash(password)}")
         return bcrypt.check_password_hash(self.password, password.encode('utf-8'))
-    
+
     def __repr__(self):
         return f"<User {self.username}>"
 
