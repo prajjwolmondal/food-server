@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Welcome to your user profile</h1>
+    <hr>
+    <p>Your username: {{ user.username }}</p>
+    <p>Your encrypted password: {{ user.password }}</p>
+    <p>Your email: {{ user.email }}</p>
+    <p>Your userID: {{ user.id }}</p>
+
+{% endblock %}

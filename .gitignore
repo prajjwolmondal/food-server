@@ -2,7 +2,11 @@ venv/
 
 .vscode/
 
+*.env
+
 *.pyc
 __pycache__/
 
 *.egg-info/
+
+logs/
