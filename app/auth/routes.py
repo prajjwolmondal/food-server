@@ -3,7 +3,7 @@ from app.auth import auth_blueprint
 from app.main import main_blueprint
 from app.models import User
 from app.auth.forms import LoginForm, SignupForm
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, session
 from flask_login import current_user, login_user, logout_user
 from werkzeug.urls import url_parse
 
@@ -22,6 +22,7 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('auth_blueprint.login'))
         login_user(user, remember=form.remember_me.data)
+        session['userID'] = user.id
 
         # An attacker could insert a URL to a malicious site in the next argument, so the application only redirects
         # when the URL is relative, which ensures that the redirect stays within the same site as the application. 
@@ -36,6 +37,7 @@ def login():
 @auth_blueprint.route('/logout')
 def logout():
     logout_user()
+    session.pop('userID', None)
     return redirect(url_for('main_blueprint.index'))
 
 @auth_blueprint.route('/signup', methods=['GET', 'POST'])
@@ -43,7 +45,9 @@ def signup():
     form = SignupForm()
     if form.validate_on_submit():
         encrypted_pwd = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        print(f"encrypted_pwd: {encrypted_pwd}")
-        db.add_user({'username': form.username.data, 'password': str(encrypted_pwd), 'email': form.email.data})
+        user_id = db.add_user({'username': form.username.data, 'password': str(encrypted_pwd), 'email': form.email.data})
+        user = User(form.username.data, str(encrypted_pwd), user_id, form.email.data)
+        login_user(user, remember=True)
+        session['userID'] = user.id
         return redirect(url_for('main_blueprint.index'))
     return render_template('auth/signup.html', title="Sign in", form=form)

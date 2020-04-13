@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Some additional info</h1>
+    <hr>
+    <p>We need a couple more things from you to give you a more tailored experience (feel free to skip this if you don't want this)</p> 
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.postal_code.label }}<br>
+            {{ form.postal_code(size=7) }}
+            {% for error in form.postal_code.errors %}
+            <span style="color:red;">{{ error }}</span>
+            {% endfor %}
+
+        </p>
+        <p>
+        {{ form.cuisine_preferences.label }}<br>
+        {{ form.cuisine_preferences }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+
+{% endblock %} 

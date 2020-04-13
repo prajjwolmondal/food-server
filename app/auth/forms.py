@@ -14,8 +14,6 @@ class SignupForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     repeated_password = PasswordField('Repeat password', validators=[DataRequired(), EqualTo("password")])
-    # postal_code = StringField('Postal code (optional - used to show closer restaurants)', 
-    #                           validators=[Regexp("^[A-Z|a-z]\\d[A-Za-z][ -]?\\d[A-Za-z]\\d$")])
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username: str):

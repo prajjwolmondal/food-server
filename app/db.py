@@ -20,6 +20,8 @@ class DB():
         user_data_collection = self.mongo.db.get_collection('user_data')
         return user_data_collection.find_one({"username": username})
 
-    def get_user_by_email(self, email: str) -> dict:
-        user_data_collection = self.mongo.db.get_collection('user_data')
-        return user_data_collection.find_one({"email": email})
+    def update_user_preferences(self, user_id: str, user_preferences_dict: dict):
+        user_preferences_collection = self.mongo.db.get_collection('user_preferences')
+        user_db_object = self.get_user_by_id(user_id)
+        user_preferences_collection.update_one({'_id': user_db_object['_id']}, 
+                                               {'$set': user_preferences_dict}, upsert=True)
