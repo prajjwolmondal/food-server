@@ -20,6 +20,4 @@ class DB():
         user_data_collection = self.mongo.db.get_collection('user_data')
         return user_data_collection.find_one({"username": username})
 
-    def get_user_by_email(self, email: str) -> dict:
-        user_data_collection = self.mongo.db.get_collection('user_data')
-        return user_data_collection.find_one({"email": email})
+    # def update_user_preferences(self, user_id, )
