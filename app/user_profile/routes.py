@@ -18,5 +18,6 @@ def get_additional_info():
     if form.validate_on_submit():
         db.update_user_preferences(session['userID'], {'postal_code': form.postal_code.data, 
                                     'cuisine_preferences': form.cuisine_preferences.data})
+        session['user_postal_code'] = form.postal_code.data
         return redirect(url_for('main_blueprint.index'))
     return render_template('user_profile/additional_info.html', form=form)

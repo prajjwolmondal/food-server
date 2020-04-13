@@ -8,8 +8,10 @@ class User(UserMixin):
         self.username = username
         self.password = password
         self.email = email
+        self.postal_code = None
+        self.cuisine_preferences = None
 
-    def set_postal_code_and_lat_long(self, new_postal_code):
+    def set_postal_code(self, new_postal_code):
         self.postal_code = new_postal_code
 
     def update_password(self, new_password):
@@ -20,6 +22,19 @@ class User(UserMixin):
 
     def __repr__(self):
         return f"<User {self.username}>"
+
+    def set_user_preferences(self, preferences_dict):
+        self.postal_code = preferences_dict['postal_code']
+        self.cuisine_preferences = preferences_dict['cuisine_preferences']
+
+    def toDict(self) -> dict:
+        user_dict = {'id': self.id, 'username': self.username, 'password': self.password, 'email': self.email}
+        if self.postal_code:
+            user_dict['postal_code'] = self.postal_code
+        if self.cuisine_preferences:
+            user_dict['cuisine_preferences'] = self.cuisine_preferences
+        
+        return user_dict
 
 @login.user_loader
 def load_user(id):

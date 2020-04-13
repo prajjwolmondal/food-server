@@ -22,7 +22,10 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('auth_blueprint.login'))
         login_user(user, remember=form.remember_me.data)
+        user_preferences_obj = db.get_user_preferences_document(user.id)
         session['userID'] = user.id
+        session['userInstance'] = user.toDict()
+        print(f"session['userInstance']: {session['userInstance']}")
 
         # An attacker could insert a URL to a malicious site in the next argument, so the application only redirects
         # when the URL is relative, which ensures that the redirect stays within the same site as the application. 

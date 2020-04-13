@@ -34,6 +34,9 @@ def create_app(config_class=Config):
     from app.user_profile import user_profile_blueprint
     application.register_blueprint(user_profile_blueprint)
 
+    from app.data_sources import data_sources_blueprint
+    application.register_blueprint(data_sources_blueprint)
+
     if not os.path.exists('logs'):
         os.mkdir('logs')
     file_handler = RotatingFileHandler('logs/foodserver.log', maxBytes=10240, backupCount=10)
