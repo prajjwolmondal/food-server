@@ -23,7 +23,6 @@ def login():
             return redirect(url_for('auth_blueprint.login'))
         login_user(user, remember=form.remember_me.data)
         user_preferences_obj = db.get_user_preferences_document(user.id)
-        session['userID'] = user.id
         user.set_user_preferences({'postal_code': user_preferences_obj['postal_code'], 'cuisine_preferences': user_preferences_obj['cuisine_preferences']})
         session['userInstance'] = user.toDict()
         print(f"session['userInstance']: {session['userInstance']}")
@@ -41,7 +40,7 @@ def login():
 @auth_blueprint.route('/logout')
 def logout():
     logout_user()
-    session.pop('userID', None)
+    session.pop('userInstance', None)
     return redirect(url_for('main_blueprint.index'))
 
 @auth_blueprint.route('/signup', methods=['GET', 'POST'])
@@ -52,6 +51,6 @@ def signup():
         user_id = db.add_user({'username': form.username.data, 'password': str(encrypted_pwd), 'email': form.email.data})
         user = User(form.username.data, str(encrypted_pwd), user_id, form.email.data)
         login_user(user, remember=True)
-        session['userID'] = user.id
+        session['userInstance'] = user.toDict()
         return redirect(url_for('main_blueprint.index'))
     return render_template('auth/signup.html', title="Sign in", form=form)
