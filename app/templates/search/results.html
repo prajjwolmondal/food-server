@@ -2,4 +2,19 @@
 
 {% block content %}
     <h1> Search results: </h1>
+    {% for restaurant in restaurant_list %}
+    <div>
+        <p>
+            <h3> {{restaurant.name}} </h3>
+            Address: {{restaurant.address}} <br>
+            {% if restaurant.open_now == true %}
+            Open now? Yes <br>
+            {% else %}
+            Open now? No <br>
+            {% endif %}
+            Rating: {{restaurant.rating}} ({{restaurant.total_ratings}}) <br>
+            Maps URL - {{restaurant.url}}
+        </p>
+    </div>
+    {% endfor %}
 {% endblock %}

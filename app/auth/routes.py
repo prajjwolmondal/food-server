@@ -24,6 +24,7 @@ def login():
         login_user(user, remember=form.remember_me.data)
         user_preferences_obj = db.get_user_preferences_document(user.id)
         session['userID'] = user.id
+        user.set_user_preferences({'postal_code': user_preferences_obj['postal_code'], 'cuisine_preferences': user_preferences_obj['cuisine_preferences']})
         session['userInstance'] = user.toDict()
         print(f"session['userInstance']: {session['userInstance']}")
 
