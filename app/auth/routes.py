@@ -23,9 +23,10 @@ def login():
             return redirect(url_for('auth_blueprint.login'))
         login_user(user, remember=form.remember_me.data)
         user_preferences_obj = db.get_user_preferences_document(user.id)
-        user.set_user_preferences({'postal_code': user_preferences_obj['postal_code'], 'cuisine_preferences': user_preferences_obj['cuisine_preferences']})
+        user.set_user_preferences({'postal_code': user_preferences_obj['postal_code'], 'lat_long': user_preferences_obj['lat_long'],
+                                   'cuisine_preferences': user_preferences_obj['cuisine_preferences']})
         session['userInstance'] = user.toDict()
-
+        print(f'userInstance')
         # An attacker could insert a URL to a malicious site in the next argument, so the application only redirects
         # when the URL is relative, which ensures that the redirect stays within the same site as the application. 
         # To determine if the URL is relative or absolute, I parse it with Werkzeug's url_parse() function 
@@ -51,5 +52,5 @@ def signup():
         user = User(form.username.data, str(encrypted_pwd), user_id, form.email.data)
         login_user(user, remember=True)
         session['userInstance'] = user.toDict()
-        return redirect(url_for('main_blueprint.index'))
+        return redirect(url_for('user_profile_blueprint.get_additional_info'))
     return render_template('auth/signup.html', title="Sign in", form=form)

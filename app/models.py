@@ -9,10 +9,8 @@ class User(UserMixin):
         self.password = password
         self.email = email
         self.postal_code = None
+        self.lat_long = None
         self.cuisine_preferences = None
-
-    def set_postal_code(self, new_postal_code):
-        self.postal_code = new_postal_code
 
     def update_password(self, new_password):
         self.password = bcrypt.generate_password_hash(new_password).decode('utf-8')
@@ -31,6 +29,8 @@ class User(UserMixin):
         user_dict = {'id': self.id, 'username': self.username, 'password': self.password, 'email': self.email}
         if self.postal_code:
             user_dict['postal_code'] = self.postal_code
+        if self.lat_long:
+            user_dict['lat_long'] = self.lat_long
         if self.cuisine_preferences:
             user_dict['cuisine_preferences'] = self.cuisine_preferences
         

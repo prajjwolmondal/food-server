@@ -7,7 +7,7 @@ def get_restaurant_from_google():
     user_lat_long = (43.654487, -79.380407) # Eaton center lat long is used if user isn't logged in
     if ('userInstance' in session):
         user_instance = session['userInstance']
-        user_lat_long = utils.convert_postal_code_to_latlong(user_instance['postal_code'])
+        user_lat_long = user_instance['lat_long']
     cuisine = session['searchQuery']
     session.pop('searchQuery', None)
     search_results = utils.find_using_google(cuisine, user_lat_long)
