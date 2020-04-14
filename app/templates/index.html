@@ -6,4 +6,16 @@
     {% else %}
     <h1>Hello {{ current_user.username }}!</h1>
     {% endif %}
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.search_query.label }}<br>
+            {{ form.search_query(size=20) }}
+            {% for error in form.search_query.errors %}
+            <span style="color:red;">{{ error }}</span>
+            {% endfor %}
+
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
 {% endblock %}

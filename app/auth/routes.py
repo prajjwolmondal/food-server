@@ -22,7 +22,9 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('auth_blueprint.login'))
         login_user(user, remember=form.remember_me.data)
-        session['userID'] = user.id
+        user_preferences_obj = db.get_user_preferences_document(user.id)
+        user.set_user_preferences({'postal_code': user_preferences_obj['postal_code'], 'cuisine_preferences': user_preferences_obj['cuisine_preferences']})
+        session['userInstance'] = user.toDict()
 
         # An attacker could insert a URL to a malicious site in the next argument, so the application only redirects
         # when the URL is relative, which ensures that the redirect stays within the same site as the application. 
@@ -37,7 +39,7 @@ def login():
 @auth_blueprint.route('/logout')
 def logout():
     logout_user()
-    session.pop('userID', None)
+    session.pop('userInstance', None)
     return redirect(url_for('main_blueprint.index'))
 
 @auth_blueprint.route('/signup', methods=['GET', 'POST'])
@@ -48,6 +50,6 @@ def signup():
         user_id = db.add_user({'username': form.username.data, 'password': str(encrypted_pwd), 'email': form.email.data})
         user = User(form.username.data, str(encrypted_pwd), user_id, form.email.data)
         login_user(user, remember=True)
-        session['userID'] = user.id
+        session['userInstance'] = user.toDict()
         return redirect(url_for('main_blueprint.index'))
     return render_template('auth/signup.html', title="Sign in", form=form)
