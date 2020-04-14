@@ -1,6 +1,7 @@
 from googlemaps import Client
 from googlemaps import places
 from flask import current_app as app
+from flask import session
 
 import os
 
@@ -41,3 +42,13 @@ def format_google_return_list(resultList: list) -> list:
         formatted_results.append(formatted_place)
 
     return formatted_results
+
+def get_user_latlong() -> tuple:
+    """Returns the latlong of the user if set, if it isn't then returns Eaton centers latlong"""
+
+    user_lat_long = (43.654487, -79.380407) # Eaton center lat long is used if user isn't logged in
+    if ('userInstance' in session):
+        user_instance = session['userInstance']
+        user_lat_long = user_instance['lat_long']
+    return user_lat_long
+

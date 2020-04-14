@@ -6,7 +6,19 @@ from wtforms.validators import DataRequired, EqualTo, Regexp, ValidationError, E
 
 class AdditionalInfoForm(FlaskForm):
 
-    cuisine_list = [('american','American'), ('chinese', 'Chinese'), ('fast_food', 'Fast Food'), ('french', 'French'), ('indian', 'Indian'), ('italian', 'Italian'), ('japanese', 'Japanese'), ('mexican', 'Mexican'), ('nepali', 'Nepali'), ('seafood', 'Seafood'), ('thai', 'Thai')]
+    cuisine_list = [('albanian','Albanian'),('argentine','Argentine'),('arab','Arab'),('armenian','Armenian'),
+    ('bangladeshi','Bangladeshi'),('bengali','Bengali'),('brazilian','Brazilian'),('buddhist','Buddhist'),
+    ('bulgarian','Bulgarian'),('cajun','Cajun'),('cantonese','Cantonese'),('caribbean','Caribbean'),('chinese','Chinese'),
+    ('danish','Danish'),('english','English'),('estonian','Estonian'),('fast food','Fast food'),('french','French'),
+    ('filipino','Filipino'),('german','German'),('greek','Greek'),('gujarati','Gujarati'),('hakka','Hakka'),('indian','Indian'),
+    ('indonesian','Indonesian'),('inuit','Inuit'),('irish','Irish'),('italian','Italian'),('jamaican','Jamaican'),
+    ('japanese','Japanese'),('jewish','Jewish'),('korean','Korean'),('kurdish','Kurdish'),('lebanese','Lebanese'),
+    ('latvian','Latvian'),('lithuanian','Lithuanian'),('malay','Malay'),('mediterranean cuisine','Mediterranean cuisine'),
+    ('mexican','Mexican'),('native american','Native American'),('nepalese','Nepalese'),('polish','Polish'),
+    ('pakistani','Pakistani'),('persian','Persian'),('peruvian','Peruvian'),('portuguese','Portuguese'),('romanian','Romanian'),
+    ('russian','Russian'),('seafood','Seafood'),('serbian','Serbian'),('south indian','South Indian'),('spanish','Spanish'),
+    ('sri lankan','Sri Lankan'),('taiwanese','Taiwanese'),('thai','Thai'),('turkish','Turkish'),('udupi','Udupi'),
+    ('ukrainian','Ukrainian'),('vietnamese','Vietnamese'),('zambian','Zambian'),('zanzibari','Zanzibari')]
 
     postal_code = StringField('Postal code', validators=[Regexp("^[A-Z|a-z]\\d[A-Za-z][ -]?\\d[A-Za-z]\\d$")])
     cuisine_preferences = SelectMultipleField('Select your top 5 cuisines:', choices=cuisine_list, validators=[InputRequired()])
