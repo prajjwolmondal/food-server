@@ -7,7 +7,7 @@ So I'm building this to help me find places quicker and easier. Based on the pre
 ## Stack used:
 - Flask for the backend server
 - MongoDB for the DB
-- ?? for the frontend
+- Jinja for the frontend (for now)
 - Google Places + Yelp API for getting restaurants from
 
 ## Milestones
