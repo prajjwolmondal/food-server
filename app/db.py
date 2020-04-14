@@ -9,7 +9,6 @@ class DB():
     def add_user(self, user_dict: dict) -> str:
         user_data_collection = self.mongo.db.get_collection('user_data')
         insertResult = user_data_collection.insert_one(user_dict)
-        print(f"insertResult id: {insertResult.inserted_id}")
         return insertResult.inserted_id
         
     def get_user_by_id(self, user_id: str) -> dict:

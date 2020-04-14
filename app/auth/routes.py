@@ -25,7 +25,6 @@ def login():
         user_preferences_obj = db.get_user_preferences_document(user.id)
         user.set_user_preferences({'postal_code': user_preferences_obj['postal_code'], 'cuisine_preferences': user_preferences_obj['cuisine_preferences']})
         session['userInstance'] = user.toDict()
-        print(f"session['userInstance']: {session['userInstance']}")
 
         # An attacker could insert a URL to a malicious site in the next argument, so the application only redirects
         # when the URL is relative, which ensures that the redirect stays within the same site as the application. 
