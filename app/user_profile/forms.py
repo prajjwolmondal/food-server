@@ -13,7 +13,7 @@ class AdditionalInfoForm(FlaskForm):
     ('filipino','Filipino'),('german','German'),('greek','Greek'),('gujarati','Gujarati'),('hakka','Hakka'),('indian','Indian'),
     ('indonesian','Indonesian'),('inuit','Inuit'),('irish','Irish'),('italian','Italian'),('jamaican','Jamaican'),
     ('japanese','Japanese'),('jewish','Jewish'),('korean','Korean'),('kurdish','Kurdish'),('lebanese','Lebanese'),
-    ('latvian','Latvian'),('lithuanian','Lithuanian'),('malay','Malay'),('mediterranean cuisine','Mediterranean cuisine'),
+    ('latvian','Latvian'),('lithuanian','Lithuanian'),('malay','Malay'),('mediterranean','Mediterranean'),
     ('mexican','Mexican'),('native american','Native American'),('nepalese','Nepalese'),('polish','Polish'),
     ('pakistani','Pakistani'),('persian','Persian'),('peruvian','Peruvian'),('portuguese','Portuguese'),('romanian','Romanian'),
     ('russian','Russian'),('seafood','Seafood'),('serbian','Serbian'),('south indian','South Indian'),('spanish','Spanish'),

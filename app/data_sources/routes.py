@@ -11,7 +11,7 @@ def get_restaurant_from_google():
     search_results = utils.find_using_google(cuisine, user_lat_long)
     next_page_token = search_results['nextPageToken']   # TODO: Add pagination to search results
     restaurant_list = search_results['resultList']
-    return render_template('search/results.html', restaurant_list=restaurant_list)
+    return render_template('search/results.html', restaurant_list=restaurant_list, cuisine=cuisine)
 
 @data_sources_blueprint.route('/supriseme')
 def surprise_me():
@@ -23,13 +23,20 @@ def surprise_me():
     ('filipino','Filipino'),('german','German'),('greek','Greek'),('gujarati','Gujarati'),('hakka', 'Hakka'),('indian','Indian'),
     ('indonesian','Indonesian'),('inuit','Inuit'),('irish','Irish'),('italian','Italian'),('jamaican','Jamaican'),
     ('japanese','Japanese'),('jewish','Jewish'),('korean','Korean'),('kurdish','Kurdish'),('lebanese','Lebanese'),
-    ('latvian','Latvian'),('lithuanian','Lithuanian'),('malay','Malay'),('mediterranean cuisine','Mediterranean cuisine'),
+    ('latvian','Latvian'),('lithuanian','Lithuanian'),('malay','Malay'),('mediterranean','Mediterranean'),
     ('mexican','Mexican'),('native american','Native American'),('nepalese','Nepalese'),('polish','Polish'),
     ('pakistani','Pakistani'),('persian','Persian'),('peruvian','Peruvian'),('portuguese','Portuguese'),('romanian','Romanian'),
     ('russian','Russian'),('seafood','Seafood'),('serbian','Serbian'),('south indian','South Indian'),('spanish','Spanish'),
     ('sri lankan','Sri Lankan'),('taiwanese','Taiwanese'),('thai','Thai'),('turkish','Turkish'),('udupi','Udupi'),
     ('ukrainian','Ukrainian'),('vietnamese','Vietnamese'),('zambian','Zambian'),('zanzibari','Zanzibari')]
     cuisine_choice = cuisine_list[randrange(0, len(cuisine_list))][1]
+    if 'userInstance' in session:
+        user_instance = session['userInstance']
+        cuisine_list = user_instance['cuisine_preferences']
+        print(f'cuisine_list: {cuisine_list}')
+        cuisine_choice = cuisine_list[randrange(0, len(cuisine_list))]
+        print(f'cuisine_choice: {cuisine_choice}')
+    
     search_results = utils.find_using_google(cuisine_choice, user_lat_long)
     restaurant_list = search_results['resultList']
-    return render_template('search/results.html', restaurant_list=restaurant_list)
+    return render_template('search/results.html', restaurant_list=restaurant_list, cuisine=cuisine_choice)
