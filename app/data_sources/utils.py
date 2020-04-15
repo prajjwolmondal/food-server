@@ -69,6 +69,7 @@ def get_blogto_review_link(restaurant_name: str) -> str:
     formatted_restaurant_name = restaurant_name.lower()
     formatted_restaurant_name = formatted_restaurant_name.replace(' ', '-')
     formatted_restaurant_name = re.sub(r"\'|\(|\)", "", formatted_restaurant_name)
+    formatted_restaurant_name = formatted_restaurant_name.replace('&amp; ', '')
     possible_review_url = f'https://www.blogto.com/restaurants/{formatted_restaurant_name}-toronto/'
     response = requests.get(possible_review_url)
     if response.status_code == 200:
