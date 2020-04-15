@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1> Search results: </h1>
+    <h1> Search results for {{ cuisine }} cuisine: </h1>
     {% for restaurant in restaurant_list %}
     <div>
         <p>
@@ -12,8 +12,12 @@
             {% else %}
             Open now? No <br>
             {% endif %}
-            Rating: {{restaurant.rating}} ({{restaurant.total_ratings}}) <br>
-            Maps URL - {{restaurant.url}}
+            Rating on google: {{restaurant.rating}} ({{restaurant.total_ratings}}) <br>
+            Maps URL - <a href='{{restaurant.url}}' target="_blank">Open in maps</a>
+            {% if restaurant.blogto_link %}
+            <br>
+            <a href='{{restaurant.blogto_link}}' target="_blank">BlogTO Review</a>
+            {% endif %}
         </p>
     </div>
     {% endfor %}

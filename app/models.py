@@ -26,7 +26,7 @@ class User(UserMixin):
         self.cuisine_preferences = preferences_dict['cuisine_preferences']
 
     def toDict(self) -> dict:
-        user_dict = {'id': self.id, 'username': self.username, 'password': self.password, 'email': self.email}
+        user_dict = {'id': self.id, 'username': self.username, 'email': self.email}
         if self.postal_code:
             user_dict['postal_code'] = self.postal_code
         if self.lat_long:

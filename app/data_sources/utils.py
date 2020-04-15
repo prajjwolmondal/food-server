@@ -1,8 +1,11 @@
 from googlemaps import Client
 from googlemaps import places
 from flask import current_app as app
+from flask import session
 
 import os
+import re
+import requests
 
 def convert_postal_code_to_latlong(postal_code: str) -> dict:
         """ Converts the given postal code to a lat/long and returns it as a dict """
@@ -30,14 +33,44 @@ def format_google_return_list(resultList: list) -> list:
     for place in resultList:
         formatted_address = place['formatted_address']
         name = place['name']
-        open_now = place['opening_hours']['open_now']
+
+        # Some of the places don't have open_now set
+        open_now = None
+        try:
+            open_now = place['opening_hours']['open_now']
+        except KeyError:
+            # Printing just for debugging/logging purposes
+            print(f'{name} doesn"t have open_now key')
+            print(f'place: {place}')
+        
         price_level = place['price_level']
         rating = place['rating']
         total_ratings = place['user_ratings_total']
-        maps_url = f"https://www.google.com/maps/search/?api=1&query={place['geometry']['location']['lat']},\
-                    {place['geometry']['location']['lng']}&query_place_id={place['place_id']}"
+        maps_url = f"https://www.google.com/maps/search/?api=1&query={place['geometry']['location']['lat']},{place['geometry']['location']['lng']}&query_place_id={place['place_id']}"
         formatted_place = {'name': name, 'address': formatted_address, 'open_now': open_now, 'price': price_level,
                            'rating': rating, 'total_ratings': total_ratings, 'url': maps_url}
+        blogto_review_link = get_blogto_review_link(name)
+        if blogto_review_link != "":
+            formatted_place['blogto_link'] = blogto_review_link
         formatted_results.append(formatted_place)
 
     return formatted_results
+
+def get_user_latlong() -> tuple:
+    """Returns the latlong of the user if set, if it isn't then returns Eaton centers latlong"""
+
+    user_lat_long = (43.654487, -79.380407) # Eaton center lat long is used if user isn't logged in
+    if ('userInstance' in session):
+        user_instance = session['userInstance']
+        user_lat_long = user_instance['lat_long']
+    return user_lat_long
+
+def get_blogto_review_link(restaurant_name: str) -> str:
+    formatted_restaurant_name = restaurant_name.lower()
+    formatted_restaurant_name = formatted_restaurant_name.replace(' ', '-')
+    formatted_restaurant_name = re.sub(r"\'|\(|\)", "", formatted_restaurant_name)
+    possible_review_url = f'https://www.blogto.com/restaurants/{formatted_restaurant_name}-toronto/'
+    response = requests.get(possible_review_url)
+    if response.status_code == 200:
+        return possible_review_url
+    return ""
