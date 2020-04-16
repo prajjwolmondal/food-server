@@ -6,6 +6,7 @@ from flask import session
 import os
 import re
 import requests
+import time
 
 def convert_postal_code_to_latlong(postal_code: str) -> dict:
         """ Converts the given postal code to a lat/long and returns it as a dict """
@@ -21,7 +22,9 @@ def find_using_google(user_query, lat_long_coordinates, minimum_price=0, maximum
         result = places.places(google_client, query=user_query, location=lat_long_coordinates, 
                                radius=radius, min_price=minimum_price, max_price=maximum_price, 
                                type=result_type_filter, page_token=next_page_token)
+        start = time.process_time()
         formatted_results = format_google_return_list(result['results'])
+        print(f'after formatted_results: {time.process_time() - start}')
         if 'next_page_token' in result:
             return {'resultList': formatted_results, 'nextPageToken': result['next_page_token']}
         return {'resultList': formatted_results, 'nextPageToken': None}

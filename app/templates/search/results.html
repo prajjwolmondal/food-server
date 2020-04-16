@@ -3,22 +3,27 @@
 {% block content %}
     <h1> Search results for {{ cuisine }} cuisine: </h1>
     {% for restaurant in restaurant_list %}
-    <div>
-        <p>
-            <h3> {{restaurant.name}} </h3>
-            Address: {{restaurant.address}} <br>
-            {% if restaurant.open_now == true %}
-            Open now? Yes <br>
-            {% else %}
-            Open now? No <br>
-            {% endif %}
-            Rating on google: {{restaurant.rating}} ({{restaurant.total_ratings}}) <br>
-            Maps URL - <a href='{{restaurant.url}}' target="_blank">Open in maps</a>
-            {% if restaurant.blogto_link %}
-            <br>
-            <a href='{{restaurant.blogto_link}}' target="_blank">BlogTO Review</a>
-            {% endif %}
-        </p>
+    <div class="card bg-dark text-white w-50 m-2">
+        <div class="card-body">
+            <div class='card-body'>
+                <h4 class="card-title"> {{restaurant.name}} </h4>
+                <p class="card-text"> Address: {{restaurant.address}} </p>
+                <p class="card-text">
+                    {% if restaurant.open_now == true %}
+                    Open now? Yes
+                    {% else %}
+                    Open now? No
+                    {% endif %}
+                </p>
+                <p class="card-text"> Rating on google: {{restaurant.rating}} ({{restaurant.total_ratings}}) </p>
+            </div>
+            <div class="card-footer">
+                <a href='{{restaurant.url}}' class="card-link" target="_blank">Open in Google Maps</a>
+                {% if restaurant.blogto_link %}
+                <a href='{{restaurant.blogto_link}}' class="card-link" target="_blank">Open BlogTO Review</a>
+                {% endif %}
+            </div>
+        </div>
     </div>
     {% endfor %}
 {% endblock %}

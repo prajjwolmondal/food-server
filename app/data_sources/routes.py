@@ -3,12 +3,17 @@ from app.data_sources import utils
 from flask import session, render_template, request
 from random import randrange
 
+import time
+
 @data_sources_blueprint.route('/googleplaces')
 def get_restaurant_from_google():
+    start = time.process_time()
     user_lat_long = utils.get_user_latlong()
+    print(f'after user_lat_long: {time.process_time() - start}')
     cuisine = session['searchQuery']
-    session.pop('searchQuery', None)
+    start = time.process_time()    
     search_results = utils.find_using_google(cuisine, user_lat_long)
+    print(f'after search_results: {time.process_time() - start}')
     next_page_token = search_results['nextPageToken']   # TODO: Add pagination to search results
     restaurant_list = search_results['resultList']
     return render_template('search/results.html', restaurant_list=restaurant_list, cuisine=cuisine)

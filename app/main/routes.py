@@ -10,6 +10,7 @@ def index():
      search_form = SearchForm()
      surprise_form = SurpriseForm()
      if search_form.validate_on_submit():
+          session.pop('searchQuery', None)
           session['searchQuery'] = search_form.search_query.data
           return redirect(url_for('data_sources_blueprint.get_restaurant_from_google'))
      return render_template('index.html', title="Home Page", form=search_form, surprise_form=surprise_form)
