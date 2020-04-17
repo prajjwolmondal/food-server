@@ -15,16 +15,19 @@
         <form action="{{ url_for('main_blueprint.index') }}" method="post" novalidate>
             {{ form.hidden_tag() }}
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-md-12">
                     {{ form.search_query(size=20) }}
                     {% for error in form.search_query.errors %}
                     <span style="color:red;">{{ error }}</span>
                     {% endfor %}
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-xs-12 col-md-6">
-                    {{ form.submit() }}
+                    <div class="float-md-right">
+                        {{ form.submit() }}
+                </div>
                 </div>
                 <div class="col-md-6">
                     <form action="{{ url_for('main_blueprint.surprise') }}" method="post" novalidate>

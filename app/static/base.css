@@ -28,3 +28,7 @@ footer{
 #mapid{
     height: 250px;
 }
+
+#search_query{
+    width: 100%;
+}
