@@ -19,13 +19,11 @@
                 </p>
                 <p>
                     {{ form.cuisine_preferences.label }}<br>
-                    <select class="selectpicker" multiple data-max-optoins="5" title="Choose up to 5 cuisines" data-selected-text-format="count > 3" data-actions-box="true">
-                        {% for item in form.cuisine_preferences%}
-                            {% if item!="" %}
-                                <option>{{ item }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
+                    {{ form.cuisine_preferences(class_="selectpicker") }}
+
+                    <!-- 
+                        <select class="selectpicker" multiple data-max-optoins="5" title="Choose up to 5 cuisines" data-selected-text-format="count > 3" data-actions-box="true">
+                    -->
                 </p>
                 <p>{{ form.submit() }}</p>
             </form>

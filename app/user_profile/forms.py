@@ -21,5 +21,5 @@ class AdditionalInfoForm(FlaskForm):
     ('ukrainian','Ukrainian'),('vietnamese','Vietnamese'),('zambian','Zambian'),('zanzibari','Zanzibari')]
 
     postal_code = StringField('Postal code', validators=[Regexp("^[A-Z|a-z]\\d[A-Za-z][ -]?\\d[A-Za-z]\\d$")])
-    cuisine_preferences = SelectMultipleField('Select your top 5 cuisines:', choices=cuisine_list, validators=[InputRequired()])
+    cuisine_preferences = SelectMultipleField('Select your top 5 cuisines:', choices=cuisine_list, validators=[InputRequired()], render_kw=({'multiple': 'multiple', 'data-max-options': '5', 'title': "Choose up to 5 cuisines", 'data-selected-text-format':'count > 3', 'data-live-search': 'true'}))
     submit = SubmitField('Submit')

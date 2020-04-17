@@ -3,8 +3,9 @@ from app.data_sources import utils
 from app.models import User
 from app.user_profile import user_profile_blueprint
 from app.user_profile.forms import AdditionalInfoForm
-from flask import render_template, session, redirect, url_for
+from flask import render_template, session, redirect, request, url_for
 from flask_login import login_required
+
 
 @user_profile_blueprint.route('/user_profile')
 @login_required
@@ -27,5 +28,4 @@ def get_additional_info():
         user_instance['cuisine_preferences'] = form.cuisine_preferences.data
         session['userInstance'] = user_instance
         return redirect(url_for('main_blueprint.index'))
-    print(f"user_instance: {user_instance}")
     return render_template('user_profile/additional_info.html', form=form)
