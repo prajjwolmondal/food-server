@@ -4,6 +4,7 @@ from flask import session, render_template, request
 from random import randrange
 
 import time
+import json
 
 @data_sources_blueprint.route('/googleplaces')
 def get_restaurant_from_google():
@@ -45,3 +46,7 @@ def surprise_me():
     search_results = utils.find_using_google(cuisine_choice, user_lat_long)
     restaurant_list = search_results['resultList']
     return render_template('search/results.html', restaurant_list=restaurant_list, cuisine=cuisine_choice)
+
+@data_sources_blueprint.route('/getlatlongfrompostalcode/<postal_code>')
+def convert_postal_code_to_latlong(postal_code):
+    return ({'latLong': utils.convert_postal_code_to_latlong(postal_code)})

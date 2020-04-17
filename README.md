@@ -4,8 +4,21 @@ I love trying out new places to eat at, but a problem I frequently encounter is 
 
 So I'm building this to help me find places quicker and easier. Based on the preferences, distance from the postal code, food-server will find you places that are in your price point and in the cuisine you're feeling. Furthermore, if you've got a list of places you've been meaning to hit up but never remember then food-server will pull those in(if relevant).
 
+To learn flask I followed [this very good guide](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world) by Miguel Grinberg
+
 ## Stack used:
-- Flask for the backend server
-- MongoDB for the DB
-- Jinja for the frontend (for now)
-- Google Places API
+- Backend
+  - bcrypt
+  - Flask
+  - Flask-login
+  - Flask-PyMongo
+  - Flask-wtforms
+  - Google Places API
+  - MongoDB
+
+- Frontend
+  - Axios
+  - Bootstrap
+  - Bootstrap-select
+  - Jinja
+  - Leaflet
