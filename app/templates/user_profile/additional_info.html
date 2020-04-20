@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block headimports %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/additional_info.css')}}">
+{% endblock %}
 
-    <blockquote class="blockquote">
-        We need a couple more things from you to give you a more tailored experience
-    </blockquote> 
-    <hr>
+{% block content %}
     <div class="container-fluid m-4">
+        <blockquote class="blockquote">
+            We need a couple more things from you to give you a more tailored experience
+        </blockquote> 
+        <hr>
         <div class="row">
             <div class="col-sm-4">
                 <form action="" method="post" novalidate>
@@ -19,6 +23,7 @@
                         {% endfor %}
                     </p>
                     <p>
+                        {{ form.cuisine_preferences.label}} <br>
                         {{ form.cuisine_preferences(class_="selectpicker") }}
                     </p>
                     <p>{{ form.submit() }}</p>

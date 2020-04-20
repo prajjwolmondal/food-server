@@ -1,6 +1,6 @@
 body {
     background-color: #FCFAED;
-    color: #5DBCFC;
+    color: #02b4ca;
 }
 
 footer{
@@ -19,14 +19,6 @@ footer{
     border-left: 1px solid #DEE2D6;
 }
 
-#mapid{
-    height: 250px;
-}
-
-#search_query{
-    width: 100%;
-}
-
 .button{
     background-color: #FFFFFF;
     color: #41C672;
@@ -35,6 +27,7 @@ footer{
 }
 
 #search_query{
+    width: 100%;
     border-radius: 25px;
     padding: 0.5em;
     margin-bottom: 20px;
