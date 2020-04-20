@@ -1,0 +1,13 @@
+#username,
+#password,
+#email,
+#repeated_password {
+    width: 60%;
+    position: relative;
+}
+
+.form-group input{
+    border: 0;
+	border-bottom: 2px solid #333;
+	display: block;
+}
