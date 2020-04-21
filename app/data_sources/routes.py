@@ -1,23 +1,24 @@
 from app.data_sources import data_sources_blueprint
 from app.data_sources import utils
-from flask import session, render_template, request
+from flask import render_template, request, session
 from random import randrange
 
-import time
 import json
 
-@data_sources_blueprint.route('/googleplaces')
+@data_sources_blueprint.route('/search')
 def get_restaurant_from_google():
-    start = time.process_time()
     user_lat_long = utils.get_user_latlong()
-    print(f'after user_lat_long: {time.process_time() - start}')
-    cuisine = session['searchQuery']
-    start = time.process_time()    
+    cuisine = session['searchQuery']   
     search_results = utils.find_using_google(cuisine, user_lat_long)
-    print(f'after search_results: {time.process_time() - start}')
     next_page_token = search_results['nextPageToken']   # TODO: Add pagination to search results
     restaurant_list = search_results['resultList']
     return render_template('search/results.html', restaurant_list=restaurant_list, cuisine=cuisine)
+
+@data_sources_blueprint.route('/get_place_detail')
+def get_restaurant_details():
+    # TODO: Wrap in try/except and return 400 if not valid https://flask.palletsprojects.com/en/1.1.x/patterns/apierrors/
+    place_id = request.args.get('place_id') 
+    utils.get_place_details(place_id)
 
 @data_sources_blueprint.route('/supriseme')
 def surprise_me():

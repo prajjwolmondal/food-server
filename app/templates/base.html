@@ -75,22 +75,23 @@
         <div class="container-fluid m-2">
             {% block content %}{% endblock %}
         </div>
+
+        <!-- TODO: Fix the footer UX -->
         {% block footer %}
             <footer class="footer mt-auto py-3">
                 <hr>
                 <div class="mx-auto">
                     <!-- <a href="https://twitter.com/TwitterDev?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
                     <div class="row">
-                    <div class="col">
-                        <div class="float-lg-right">
+                        <div class="col">
                             <a href="https://github.com/theposter/food-server"><img src="{{url_for('static', filename='github_mark.png')}}" title="Github repo for site" height="auto" width="40px"/> </a>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="float-lg-left pt-2">
+                    <div class="row">
+                        <div class="col">
                             <p>Copyright &copy; 2020 by Prajjwol Mondal </p>
                         </div>
-                    </div>
+                        {% block footerattributions %}{% endblock %}
                     </div>
                 </div>
             </footer>
