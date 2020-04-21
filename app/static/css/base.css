@@ -34,7 +34,7 @@ footer{
     margin-top: 20px;
 }
 
-#logo{
+#mobile-nav-logo, #nav-logo{
     width: 32px;
     height: 40px;
 }
