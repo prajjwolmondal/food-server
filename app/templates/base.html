@@ -29,13 +29,12 @@
                 <!-- Brand -->
                 <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                     <div class="navbar-brand">
-                        <!-- <img id="logo" src="{{url_for('static', filename='branding/logo_full_transparent.png')}}" class="d-inline-block align-top"> -->
-                        <img id="logo" src="{{url_for('static', filename='branding/logo_compact_transparent.webp')}}" class="d-inline-block align-top">
+                        <img id="nav-logo" src="{{url_for('static', filename='branding/logo_compact_transparent.webp')}}" class="d-inline-block align-top" alt="foodserver logo">
                     </div>
                 </div>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                    <img id="logo" src="{{url_for('static', filename='branding/logo_compact_transparent.webp')}}" class="d-inline-block align-top">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-label="Mobile navigation trigger">
+                    <img id="mobile-nav-logo" src="{{url_for('static', filename='branding/logo_compact_transparent.webp')}}" class="d-inline-block align-top" alt="foodserver logo">
                 </button>
 
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
