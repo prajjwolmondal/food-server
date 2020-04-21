@@ -22,3 +22,5 @@ def surprise():
 @main_blueprint.route('/favicon.ico')
 def favicon():
      return send_from_directory('templates', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+# TODO: Fix bug of "Surprise me" triggering the field required validation for search

@@ -1,39 +1,51 @@
 {% extends "base.html" %}
 
+{% block headimports %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/auth_form.css')}}">
+{% endblock %}
+
 {% block content %}
-    <h1>Sign Up</h1>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}
-            {% for error in form.username.errors %}
-            <span style="color:red;">{{ error }}</span>
-            {% endfor %}
-
-        </p>
-        <p>
-            {{ form.email.label }}<br>
-            {{ form.email(size=32) }}
-            {% for error in form.email.errors %}
-            <span style="color:red;">{{ error }}</span>
-            {% endfor %}
-
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}
-            {% for error in form.password.errors %}
-            <span style="color:red;">{{ error }}</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.repeated_password.label }}<br>
-            {{ form.repeated_password(size=32) }}
-            {% for error in form.repeated_password.errors %}
-            <span style="color:red;">{{ error }}</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
+    <div class="container-fluid">
+        <h1>Sign Up</h1>
+        <hr>
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <h6>{{ form.username.label }}</h6>
+                    {{ form.username(size=32) }}
+                    {% for error in form.username.errors %}
+                    <span style="color:red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-6">
+                    <h6>{{ form.email.label }}</h6>
+                    {{ form.email(size=32) }}
+                    {% for error in form.email.errors %}
+                    <span style="color:red;">{{ error }}</span>
+                    {% endfor %}
+                    <small id="emailHelp" class="form-text">We'll never share your email with anyone else.</small>
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="form-group col-md-6">
+                    <h6>{{ form.password.label }}</h6>
+                    {{ form.password(size=32) }}
+                    {% for error in form.password.errors %}
+                    <span style="color:red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-6">
+                    <h6>{{ form.repeated_password.label }}</h6>
+                    {{ form.repeated_password(size=32) }}
+                    {% for error in form.repeated_password.errors %}
+                    <span style="color:red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
+            {{ form.submit(class_="btn btn-dark") }}
+        </form>
+    </div>
 {% endblock %}

@@ -1,25 +1,39 @@
 {% extends "base.html" %}
 
+{% block headimports %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/additional_info.css')}}">
+{% endblock %}
+
 {% block content %}
-
-    <h1>Some additional info</h1>
-    <hr>
-    <p>We need a couple more things from you to give you a more tailored experience (feel free to skip this if you don't want this)</p> 
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.postal_code.label }}<br>
-            {{ form.postal_code(size=7) }}
-            {% for error in form.postal_code.errors %}
-            <span style="color:red;">{{ error }}</span>
-            {% endfor %}
-
-        </p>
-        <p>
-        {{ form.cuisine_preferences.label }}<br>
-        {{ form.cuisine_preferences }}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
+    <div class="container-fluid m-4">
+        <blockquote class="blockquote">
+            We need a couple more things from you to give you a more tailored experience
+        </blockquote> 
+        <hr>
+        <div class="row">
+            <div class="col-sm-4">
+                <form action="" method="post" novalidate>
+                    {{ form.hidden_tag() }}
+                    <p>
+                        {{ form.postal_code.label }}<br>
+                        {{ form.postal_code(size=7, onchange="addMapMarker();") }}
+                        {% for error in form.postal_code.errors %}
+                        <span style="color:red;">{{ error }}</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.cuisine_preferences.label}} <br>
+                        {{ form.cuisine_preferences(class_="selectpicker") }}
+                    </p>
+                    <p>{{ form.submit() }}</p>
+                </form>
+            </div>
+            <div class="col-sm-8">
+                <div id='mapid'></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='map.js') }}"></script>
 
 {% endblock %} 

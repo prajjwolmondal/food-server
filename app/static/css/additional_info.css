@@ -1,0 +1,9 @@
+#mapid{
+    height: 250px;
+}
+
+#postal_code{
+    border: 0;
+	border-bottom: 2px solid #333;
+	display: block;
+}

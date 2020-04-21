@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block headimports %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/loading_page.css')}}">
+    <script type="text/javascript" src="{{ url_for('static', filename='loading.js') }}"></script>
+{% endblock %}
+
+{% block navbar %} {% endblock %}
+
+<!-- Credit to https://codepen.io/csspoints/pen/LqNdoZ for the wave loader -->
+{% block content %}
+    <div class="row m-5"></div>
+    <div class="row m-5"></div>
+    <div class="row m-5">
+        <div class="mx-auto"> 
+            <h2>Loading results...</h2> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="wave"></div>
+    </div>
+{% endblock %}
+
+{% block footer %} {% endblock %}
