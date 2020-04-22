@@ -1,3 +1,4 @@
+// NOT USED CURRENTLY
 
 function fetch_places_data(){
 	axios.get("/fetch_google_restaurants")

@@ -9,4 +9,4 @@ class SearchForm(FlaskForm):
     submit = SubmitField('Search')
 
 class SurpriseForm(FlaskForm):
-    surpise_me_button = SubmitField("Surprise Me")
+    surprise_me_button = SubmitField("Surprise Me")
