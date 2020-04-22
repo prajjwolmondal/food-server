@@ -9,54 +9,52 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
-        <h2> Search results for {{ cuisine }}: </h2>
-        <hr>
-        {% for restaurant in restaurant_list %}
-        <div class="row mb-3">
-            <div class="col-sm-7">
-                <div class="card bg-dark text-white">
-                    <div class="card-body">
-                        <div class='card-body'>
-                            <h4 class="card-title"> 
-                                {{restaurant.name}} 
-                                {% if restaurant.open_now == false %}
-                                    <img src="{{url_for('static', filename='closed-color.png')}}" title="Restaurant is closed" height="auto" width="40px"/> 
-                                {% endif %}
-                            </h4>
-                            <p class="card-text"> Address: {{restaurant.address}} </p>
-                            <p class="card-text">
-                                {% if restaurant.opening_hours %}
-                                    Hours today: {{ restaurant.opening_hours }}
-                                {% endif %}
-                            </p>
-                            <p class="card-text"> 
-                                Rating on google: 
-                                {% for i in range(restaurant.rating) %}
-                                    <span class="fa fa-star checked"></span>
-                                {% endfor %}
-                                {% for i in range(5-restaurant.rating) %}
-                                    <span class="fa fa-star"></span>
-                                {% endfor %}
-                                ({{restaurant.total_ratings}}) 
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <a href='{{restaurant.url}}' class="card-link" target="_blank">Open in Google Maps</a>
-                            {% if restaurant.website %}
-                            <a href='{{restaurant.website}}' class="card-link" target="_blank">Go to their site</a>
+    <h2> Search results for {{ cuisine }}: </h2>
+    <hr>
+    {% for restaurant in restaurant_list %}
+    <div class="row mb-3">
+        <div class="col-sm-7">
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                    <div class='card-body'>
+                        <h4 class="card-title"> 
+                            {{restaurant.name}} 
+                            {% if restaurant.open_now == false %}
+                                <img src="{{url_for('static', filename='closed-color.png')}}" title="Restaurant is closed" height="auto" width="50px"/> 
                             {% endif %}
-                            {% if restaurant.blogto_link %}
-                            <a href='{{restaurant.blogto_link}}' class="card-link" target="_blank">Open BlogTO Review</a>
+                        </h4>
+                        <p class="card-text"> Address: {{restaurant.address}} </p>
+                        <p class="card-text">
+                            {% if restaurant.opening_hours %}
+                                Hours today: {{ restaurant.opening_hours }}
                             {% endif %}
-                        </div>
+                        </p>
+                        <p class="card-text"> 
+                            Rating on google: 
+                            {% for i in range(restaurant.rating) %}
+                                <span class="fa fa-star checked"></span>
+                            {% endfor %}
+                            {% for i in range(5-restaurant.rating) %}
+                                <span class="fa fa-star"></span>
+                            {% endfor %}
+                            ({{restaurant.total_ratings}}) 
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href='{{restaurant.url}}' class="card-link" target="_blank">Open in Google Maps</a>
+                        {% if restaurant.website %}
+                        <a href='{{restaurant.website}}' class="card-link" target="_blank">Go to their site</a>
+                        {% endif %}
+                        {% if restaurant.blogto_link %}
+                        <a href='{{restaurant.blogto_link}}' class="card-link" target="_blank">Open BlogTO Review</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
-            <div class="col-sm-5"></div>
         </div>
-        {% endfor %}
+        <div class="col-sm-5"></div>
     </div>
+    {% endfor %}
 {% endblock %}
 
 {% block footerattributions %}
