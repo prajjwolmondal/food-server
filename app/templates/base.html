@@ -28,9 +28,9 @@
         <meta name="google-site-verification" content="l4JPuzVNwsMQ9jCB8_l-dqN0yf8sxgVY_LG39Wc6FFk" />
 
     </head>
-    <body>
+    <body class="d-flex flex-column h-100">
         {% block navbar %}
-            <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <nav class="navbar navbar-expand-md navbar-custom">
 
                 <!-- Brand -->
                 <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
@@ -66,29 +66,28 @@
                 </div>
             </nav>
         {% endblock %}
-        <div class="container-fluid m-2">
+        <div class="container-fluid my-5">
             {% block content %}{% endblock %}
         </div>
-
-        <!-- TODO: Fix the footer UX -->
-        {% block footer %}
-            <footer class="footer mt-auto py-3">
-                <hr>
-                <div class="mx-auto">
-                    <!-- <a href="https://twitter.com/TwitterDev?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
-                    <div class="row">
-                        <div class="col">
-                            <a href="https://github.com/theposter/food-server"><img src="{{url_for('static', filename='github_mark.png')}}" title="Github repo for site" height="auto" width="40px"/> </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <p>Copyright &copy; 2020 by Prajjwol Mondal </p>
-                        </div>
-                        {% block footerattributions %}{% endblock %}
-                    </div>
-                </div>
-            </footer>
-        {% endblock %}
     </body>
+    <!-- TODO: Fix the footer UX -->
+    {% block footer %}
+    <footer class="footer mt-auto py-3">
+        <hr>
+        <div class="mx-auto">
+            <!-- <a href="https://twitter.com/TwitterDev?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+            <div class="row">
+                <div class="col">
+                    <a href="https://github.com/theposter/food-server"><img src="{{url_for('static', filename='github_mark.png')}}" title="Github repo for site" height="auto" width="40px"/> </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>Copyright &copy; 2020 by Prajjwol Mondal </p>
+                </div>
+                {% block footerattributions %}{% endblock %}
+            </div>
+        </div>
+    </footer>
+    {% endblock %}  
 </html>
